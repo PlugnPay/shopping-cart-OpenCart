@@ -106,31 +106,31 @@ class ControllerExtensionPaymentPlugnpayApiCc extends Controller {
 			if ($pnp_response['FinalStatus'] == 'success') {
 				$message = '';
 
-				if (isset($response_info['auth-code'])) {
-					$message .= 'Authorization Code: ' . $response_info['auth-code'] . "\n";
+				if (isset($pnp_response['auth-code'])) {
+					$message .= 'Authorization Code: ' . $pnp_response['auth-code'] . "\n";
 				}
 
-				if (isset($response_info['avs-code'])) {
-					$message .= 'AVS Response: ' . $response_info['avs-code'] . "\n";
+				if (isset($pnp_response['avs-code'])) {
+					$message .= 'AVS Response: ' . $pnp_response['avs-code'] . "\n";
 				}
 
-				if (isset($response_info['orderID'])) {
-					$message .= 'Transaction ID: ' . $response_info['orderID'] . "\n";
+				if (isset($pnp_response['orderID'])) {
+					$message .= 'Transaction ID: ' . $pnp_response['orderID'] . "\n";
 				}
 
-				if (isset($response_info['resp-code'])) {
-					$message .= 'Card Code Response: ' . $response_info['resp-code'] . "\n";
+				if (isset($pnp_response['resp-code'])) {
+					$message .= 'Card Code Response: ' . $pnp_response['resp-code'] . "\n";
 				}
 
-				if (isset($response_info['cvvresp'])) {
-					$message .= 'Cardholder Authentication Verification Response: ' . $response_info['cvvresp'] . "\n";
+				if (isset($pnp_response['cvvresp'])) {
+					$message .= 'Cardholder Authentication Verification Response: ' . $pnp_response['cvvresp'] . "\n";
 				}
 
 				$this->model_checkout_order->addOrderHistory($this->session->data['order_id'], $this->config->get('config_order_status_id'), $message, false);
 
 				$json['redirect'] = $this->url->link('checkout/success', '', true);
 			} else {
-				$json['error'] = $response_info['MErrMsg'];
+				$json['error'] = $pnp_response['MErrMsg'];
 			}
 		} else {
 			$json['error'] = 'Empty Gateway Response';
