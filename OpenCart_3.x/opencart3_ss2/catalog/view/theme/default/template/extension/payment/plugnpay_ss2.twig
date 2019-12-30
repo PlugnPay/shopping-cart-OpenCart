@@ -1,0 +1,25 @@
+<form action="https://pay1.plugnpay.com/pay/" method="post">
+  <input type="hidden" name="pt_gateway_account" value="{{ pt_gateway_account }}" />
+  <input type="hidden" name="pt_order_classifier" value="{{ pt_order_classifier }}" />
+  <input type="hidden" name="pt_transaction_amount" value="{{ pt_transaction_amount }}" />
+  <input type="hidden" name="pd_display_items" value="{{ pd_display_items }}" />
+  <input type="hidden" name="pt_transaction_type" value="{{ pt_transaction_type }}" />
+  <input type="hidden" name="pb_post_auth" value="{{ pb_post_auth }}" />
+  <input type="hidden" name="pt_currency" value="{{ pt_currency }}" />
+  <input type="hidden" name="pt_payment_name" value="{{ pt_payment_name }}" />
+  <input type="hidden" name="pt_billing_company" value="{{ pt_billing_company }}" />
+  <input type="hidden" name="pt_billing_address_1" value="{{ pt_billing_address_1 }}" />
+  <input type="hidden" name="pt_billing_city" value="{{ pt_billing_city }}" />
+  <input type="hidden" name="pt_billing_state" value="{{ pt_billing_state }}" />
+  <input type="hidden" name="pt_billing_postal_code" value="{{ pt_billing_postal_code }}" />
+  <input type="hidden" name="pt_billing_country" value="{{ pt_billing_country }}" />
+  <input type="hidden" name="pt_billing_phone_number" value="{{ pt_billing_phone_number }}" />
+  <input type="hidden" name="pt_billing_email_address" value="{{ pt_billing_email_address }}" />
+  <input type="hidden" name="pb_transition_type" value="{{ pb_transition_type }}" />
+  <input type="hidden" name="pb_success_url" value="{{ pb_success_url }}" />
+  <div class="buttons">
+    <div class="pull-right">
+      <input type="submit" value="{{ button_confirm }}" class="btn btn-primary" />
+    </div>
+  </div>
+</form>
