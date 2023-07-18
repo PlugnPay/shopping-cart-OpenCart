@@ -12,18 +12,18 @@ Multiple payment styles are supported, each covering a different checkout need.
 ## For OpenCart 2.x
 
 * API (Remote Auth)
-  - [Download - Credit Card](./OpenCart_2.x/opencart2_api_cc.zip)
-  - [Download - ACH/eCheck](./OpenCart_2.x/opencart2_api_ach.zip)
+  - [Download - Credit Card](./OpenCart_2.x/opencart_api_cc.zip)
+  - [Download - ACH/eCheck](./OpenCart_2.x/opencart_api_ach.zip)
 * Smart Screens v2 (Gateway Hosted Solution)
   - [Download](./OpenCart_2.x/opencart_ss.zip)
 
 ## For OpenCart 3.x
 
 * API (Remote Auth)
-  - [Download - Credit Card](./OpenCart_3.x/opencart2_api_cc.zip)
-  - [Download - ACH/eCheck](./OpenCart_3.x/opencart2_api_ach.zip)
+  - [Download - Credit Card](./OpenCart_3.x/opencart_api_cc.zip)
+  - [Download - ACH/eCheck](./OpenCart_3.x/opencart_api_ach.zip)
 * Smart Screens v2 (Gateway Hosted Solution)
-  - [Download](./OpenCart_2.x/opencart_ss2.zip)
+  - [Download](./OpenCart_3.x/opencart_ss2.zip)
 
 ## Installation
 
