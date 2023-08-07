@@ -94,3 +94,6 @@ History:
 12/16/19
 - declined card response fix
 
+08/07/2023
+- added code to clear cart basket upon successful payment
+

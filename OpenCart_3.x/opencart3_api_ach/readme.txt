@@ -91,3 +91,6 @@ History:
 12/17/2019
 - initial release
 
+08/07/2023
+- added code to clear cart basket upon successful payment
+
