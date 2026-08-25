@@ -39,7 +39,7 @@ To Install:
      - Gateway Account (PlugnPay username) [required]
      - Success-Link URL (shown for reference; do not change)
      - Total (optional minimum order amount)
-     - Order Status (use Pending)
+     - Order Status (defaults to Pending)
      - Geo Zone, Status, Sort Order
      - Debug Logging (optional; writes to storage/logs)
 

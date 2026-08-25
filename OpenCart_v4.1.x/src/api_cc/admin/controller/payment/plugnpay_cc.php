@@ -1,6 +1,8 @@
 <?php
 namespace Opencart\Admin\Controller\Extension\PlugnpayApiCc\Payment;
 
+use Opencart\System\Library\Extension\PlugnpayApiCc\RemoteApi;
+
 /**
  * Class PlugnpayCc
  *
@@ -46,11 +48,11 @@ class PlugnpayCc extends \Opencart\System\Engine\Controller {
 		$data['payment_plugnpay_cc_use_cvv'] = ($use_cvv === null || $use_cvv === '') ? 1 : (int)$use_cvv;
 		$data['payment_plugnpay_cc_total'] = $this->config->get('payment_plugnpay_cc_total');
 		$data['payment_plugnpay_cc_debug'] = $this->config->get('payment_plugnpay_cc_debug');
-		$data['payment_plugnpay_cc_order_status_id'] = (int)$this->config->get('payment_plugnpay_cc_order_status_id');
 
 		$this->load->model('localisation/order_status');
 
 		$data['order_statuses'] = $this->model_localisation_order_status->getOrderStatuses();
+		$data['payment_plugnpay_cc_order_status_id'] = $this->defaultOrderStatusId($data['order_statuses']);
 
 		$data['payment_plugnpay_cc_geo_zone_id'] = $this->config->get('payment_plugnpay_cc_geo_zone_id');
 
@@ -100,5 +102,30 @@ class PlugnpayCc extends \Opencart\System\Engine\Controller {
 
 		$this->response->addHeader('Content-Type: application/json');
 		$this->response->setOutput(json_encode($json));
+	}
+
+	/**
+	 * Install — default order status to Pending.
+	 *
+	 * @return void
+	 */
+	public function install(): void {
+		$this->load->model('setting/setting');
+		$this->load->model('localisation/order_status');
+
+		$this->model_setting_setting->editSetting('payment_plugnpay_cc', [
+			'payment_plugnpay_cc_order_status_id' => $this->defaultOrderStatusId($this->model_localisation_order_status->getOrderStatuses())
+		]);
+	}
+
+	/**
+	 * @param list<array<string, mixed>> $order_statuses
+	 */
+	private function defaultOrderStatusId(array $order_statuses): int {
+		return RemoteApi::resolveOrderStatusId(
+			(int)$this->config->get('payment_plugnpay_cc_order_status_id'),
+			$order_statuses,
+			(int)$this->config->get('config_order_status_id')
+		);
 	}
 }

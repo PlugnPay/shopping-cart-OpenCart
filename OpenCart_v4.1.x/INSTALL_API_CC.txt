@@ -42,7 +42,7 @@ To Install:
      - Gateway Account (PlugnPay username) [required]
      - Remote Client Password [required]
      - Authorization Type
-     - Request CVV, Total, Order Status, Geo Zone, Status, Sort Order
+     - Request CVV, Total, Order Status (defaults to Pending), Geo Zone, Status, Sort Order
      - Debug Logging (optional; writes to storage/logs)
 
 5. Confirm storefront HTTPS.

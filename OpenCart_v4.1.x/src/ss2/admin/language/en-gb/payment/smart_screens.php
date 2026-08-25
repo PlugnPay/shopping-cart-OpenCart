@@ -21,7 +21,7 @@ $_['entry_debug']        = 'Debug Logging';
 $_['help_merchant']      = 'PlugnPay publisher / gateway username. There is no public demo account.';
 $_['help_callback']      = 'PlugnPay POSTs here after hosted checkout. Leave this value as shown. Requires storefront HTTPS and Session Samesite Cookie = None (Settings → Server) so the return POST can restore the shopper session.';
 $_['help_total']         = 'The checkout total the order must reach before this payment method becomes active.';
-$_['help_order_status']  = 'Use a Pending / unpaid status. Transactions are authorization-only; capture, void, and refund are done in PlugnPay Merchant Admin.';
+$_['help_order_status']  = 'Defaults to Pending. Keep a Pending / unpaid status for authorization-only transactions; capture, void, and refund are done in PlugnPay Merchant Admin.';
 $_['help_debug']         = 'Writes sanitized request/response logs under the OpenCart storage logs directory.';
 
 // Error

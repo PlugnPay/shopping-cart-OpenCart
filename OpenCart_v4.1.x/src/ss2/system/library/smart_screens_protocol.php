@@ -64,6 +64,36 @@ class SmartScreensProtocol {
 	}
 
 	/**
+	 * Prefer a saved status, else the OpenCart "Pending" status, else the store default.
+	 *
+	 * @param list<array<string, mixed>> $order_statuses
+	 */
+	public static function resolveOrderStatusId(int $saved, array $order_statuses, int $store_default = 0): int {
+		if ($saved > 0) {
+			return $saved;
+		}
+
+		foreach ($order_statuses as $status) {
+			if (!is_array($status)) {
+				continue;
+			}
+
+			$name = (string)($status['name'] ?? '');
+			$id = (int)($status['order_status_id'] ?? 0);
+
+			if ($id > 0 && strcasecmp($name, 'Pending') === 0) {
+				return $id;
+			}
+		}
+
+		if ($store_default > 0) {
+			return $store_default;
+		}
+
+		return 1;
+	}
+
+	/**
 	 * Build hosted-fields map for POST to https://pay1.plugnpay.com/pay/
 	 *
 	 * @param array<string, mixed> $input

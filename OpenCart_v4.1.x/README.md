@@ -31,7 +31,7 @@ Requires storefront HTTPS and Session Samesite Cookie = **None**.
 1. Download [plugnpay_ss2.ocmod.zip](./plugnpay_ss2.ocmod.zip) (do not rename).
 2. Admin → Extensions → Installer → upload, then Install.
 3. Admin → Extensions → Payments → Install **PlugnPay Smart Screens v2**.
-4. Enter Gateway Account. Set Order Status to Pending. Enable the method.
+4. Enter Gateway Account. Order Status defaults to Pending. Enable the method.
 5. Set Session Samesite Cookie to **None**. Place a test order over HTTPS.
 
 ## Remote API (Credit Card)

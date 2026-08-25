@@ -27,7 +27,7 @@ $_['help_password']      = 'Remote Client Password from PlugnPay Security Admini
 $_['help_authtype']      = 'authonly leaves the order unpaid until you capture in PlugnPay Admin. authpostauth authorizes and settles (sale).';
 $_['help_use_cvv']       = 'Collect the card security code on checkout.';
 $_['help_total']         = 'The checkout total the order must reach before this payment method becomes active.';
-$_['help_order_status']  = 'Use Pending for authonly. Use Processing (or paid) for authpostauth. Capture, void, and refund are done in PlugnPay Merchant Admin.';
+$_['help_order_status']  = 'Defaults to Pending. Keep Pending for authonly. Use Processing (or paid) for authpostauth. Capture, void, and refund are done in PlugnPay Merchant Admin.';
 $_['help_debug']         = 'Writes sanitized request/response logs under the OpenCart storage logs directory. Full PAN, CVV, and password are never logged.';
 
 // Error

@@ -161,11 +161,7 @@ class PlugnpayCc extends \Opencart\System\Engine\Controller {
 					. ' AVS: ' . ($response['avs-code'] ?? '')
 					. ' CVV: ' . ($response['cvvresp'] ?? '');
 
-				$status_id = (int)$this->config->get('payment_plugnpay_cc_order_status_id');
-
-				if ($status_id < 1) {
-					$status_id = 1;
-				}
+				$status_id = $this->approvedOrderStatusId();
 
 				$this->model_checkout_order->addHistory((int)$order_info['order_id'], $status_id, $message, true);
 
@@ -197,6 +193,16 @@ class PlugnpayCc extends \Opencart\System\Engine\Controller {
 		}
 
 		return $items;
+	}
+
+	private function approvedOrderStatusId(): int {
+		$this->load->model('localisation/order_status');
+
+		return RemoteApi::resolveOrderStatusId(
+			(int)$this->config->get('payment_plugnpay_cc_order_status_id'),
+			$this->model_localisation_order_status->getOrderStatuses(),
+			(int)$this->config->get('config_order_status_id')
+		);
 	}
 
 	private function logger(): RemoteApiLogger {

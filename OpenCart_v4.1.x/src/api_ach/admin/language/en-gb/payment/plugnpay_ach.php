@@ -25,7 +25,7 @@ $_['help_merchant']      = 'PlugnPay publisher / gateway username. ACH must be e
 $_['help_password']      = 'Remote Client Password from PlugnPay Security Administration — not your admin login password.';
 $_['help_authtype']      = 'authonly leaves the order unpaid until you capture in PlugnPay Admin. authpostauth authorizes and settles.';
 $_['help_total']         = 'The checkout total the order must reach before this payment method becomes active.';
-$_['help_order_status']  = 'Use Pending for authonly. Use Processing (or paid) for authpostauth. Capture, void, and refund are done in PlugnPay Merchant Admin.';
+$_['help_order_status']  = 'Defaults to Pending. Keep Pending for authonly. Use Processing (or paid) for authpostauth. Capture, void, and refund are done in PlugnPay Merchant Admin.';
 $_['help_debug']         = 'Writes sanitized request/response logs under the OpenCart storage logs directory. Routing, account, check number, and password are never logged in full.';
 
 // Error

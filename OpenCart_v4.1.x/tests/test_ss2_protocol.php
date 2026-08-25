@@ -81,6 +81,17 @@ assert_true(SmartScreensProtocol::extractCustomValue($success, 'ocsess') === 'se
 assert_true(SmartScreensProtocol::extractCustomValue($success, 'ocorderid') === '42', 'extract order custom');
 assert_true(SmartScreensProtocol::extractCustomValue(['ocsess' => 'flat'], 'ocsess') === 'flat', 'flat custom fallback');
 
+$statuses = [
+	['order_status_id' => 2, 'name' => 'Processing'],
+	['order_status_id' => 5, 'name' => 'Pending'],
+	['order_status_id' => 7, 'name' => 'Complete'],
+];
+assert_true(SmartScreensProtocol::resolveOrderStatusId(0, $statuses, 2) === 5, 'unset status defaults to Pending');
+assert_true(SmartScreensProtocol::resolveOrderStatusId(7, $statuses, 2) === 7, 'saved status is kept');
+assert_true(SmartScreensProtocol::resolveOrderStatusId(0, [['order_status_id' => 8, 'name' => 'PENDING']], 2) === 8, 'Pending match is case-insensitive');
+assert_true(SmartScreensProtocol::resolveOrderStatusId(0, [['order_status_id' => 9, 'name' => 'Shipped']], 3) === 3, 'store default when Pending missing');
+assert_true(SmartScreensProtocol::resolveOrderStatusId(0, [], 0) === 1, 'fallback id 1');
+
 $logger = new SmartScreensLogger(sys_get_temp_dir(), false);
 $sanitized = $logger->sanitize([
 	'pt_card_number' => '4111111111111111',
@@ -103,11 +114,13 @@ $src = is_file($controller) ? (string)file_get_contents($controller) : '';
 assert_true(str_contains($src, 'namespace Opencart\\Catalog\\Controller\\Extension\\PlugnpaySs2\\Payment;'), 'catalog namespace');
 assert_true(str_contains($src, 'class SmartScreens'), 'catalog class name');
 assert_true(str_contains($src, 'SmartScreensProtocol::buildHostedFields'), 'catalog uses protocol helper');
+assert_true(str_contains($src, 'approvedOrderStatusId'), 'catalog uses order status resolver');
 assert_true(!str_contains($src, 'class PlugnpaySs2'), 'catalog class has no digit suffix');
 
 $admin = dirname(__DIR__) . '/src/ss2/admin/controller/payment/smart_screens.php';
 $admin_src = is_file($admin) ? (string)file_get_contents($admin) : '';
 assert_true(str_contains($admin_src, 'class SmartScreens'), 'admin class name');
+assert_true(str_contains($admin_src, 'function install'), 'admin install defaults order status');
 assert_true(is_file(dirname(__DIR__) . '/src/ss2/admin/view/template/payment/smart_screens.twig'), 'admin twig exists');
 assert_true(is_file(dirname(__DIR__) . '/src/ss2/catalog/view/template/payment/smart_screens.twig'), 'catalog twig exists');
 

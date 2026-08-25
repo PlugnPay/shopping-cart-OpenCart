@@ -54,7 +54,7 @@ autoload a PHP class whose name contains a digit.
 | Authorization Type | `authonly` or `authpostauth` |
 | Request CVV | Collect card security code (on by default) |
 | Total | Optional minimum order total |
-| Order Status | Pending for authonly; Processing / paid for authpostauth |
+| Order Status | Defaults to Pending; use Processing / paid for authpostauth |
 | Geo Zone | Optional restriction |
 | Debug Logging | Sanitized logs under `storage/logs/plugnpay_api_cc_YYYYMMDD.log` |
 | Status / Sort Order | Enable and ordering among payment methods |

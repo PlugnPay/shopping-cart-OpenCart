@@ -135,11 +135,7 @@ class SmartScreens extends \Opencart\System\Engine\Controller {
 			. ' TransID/orderID: ' . $trans_id
 			. ' (auth-only; settle in PlugnPay Admin)';
 
-		$status_id = (int)$this->config->get('payment_smart_screens_order_status_id');
-
-		if ($status_id < 1) {
-			$status_id = 1;
-		}
+		$status_id = $this->approvedOrderStatusId();
 
 		$this->model_checkout_order->addHistory($order_id, $status_id, $message, true);
 
@@ -237,6 +233,16 @@ class SmartScreens extends \Opencart\System\Engine\Controller {
 		}
 
 		return true;
+	}
+
+	private function approvedOrderStatusId(): int {
+		$this->load->model('localisation/order_status');
+
+		return SmartScreensProtocol::resolveOrderStatusId(
+			(int)$this->config->get('payment_smart_screens_order_status_id'),
+			$this->model_localisation_order_status->getOrderStatuses(),
+			(int)$this->config->get('config_order_status_id')
+		);
 	}
 
 	private function logger(): SmartScreensLogger {

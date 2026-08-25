@@ -25,7 +25,7 @@ autoload a class such as `PlugnpaySs2` because it looks for
 | Gateway Account | PlugnPay publisher username (required) |
 | Success-Link URL | Callback shown for reference |
 | Total | Minimum order total to offer this method |
-| Order Status | Use Pending / unpaid |
+| Order Status | Defaults to Pending / unpaid |
 | Geo Zone | Optional restriction |
 | Debug Logging | Sanitized logs under `storage/logs/plugnpay_ss2_YYYYMMDD.log` |
 

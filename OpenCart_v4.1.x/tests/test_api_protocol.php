@@ -85,6 +85,13 @@ assert_true(RemoteApi::ENDPOINT === 'https://pay1.plugnpay.com/payment/pnpremote
 assert_true(RemoteApi::normalizeAuthtype('capture') === 'authpostauth', 'capture maps to authpostauth');
 assert_true(RemoteApi::normalizeAuthtype('AUTH_ONLY') === 'authonly', 'AUTH_ONLY maps to authonly');
 
+$statuses = [
+	['order_status_id' => 2, 'name' => 'Processing'],
+	['order_status_id' => 5, 'name' => 'Pending'],
+];
+assert_true(RemoteApi::resolveOrderStatusId(0, $statuses, 2) === 5, 'unset status defaults to Pending');
+assert_true(RemoteApi::resolveOrderStatusId(2, $statuses, 5) === 2, 'saved status is kept');
+
 $sale = RemoteApi::buildCreditFields([
 	'authtype'    => 'authpostauth',
 	'amount'      => '1.00',
@@ -186,12 +193,21 @@ $controller = dirname(__DIR__) . '/src/api_cc/catalog/controller/payment/plugnpa
 $src = is_file($controller) ? (string)file_get_contents($controller) : '';
 assert_true(str_contains($src, 'class PlugnpayCc'), 'cc catalog class name');
 assert_true(str_contains($src, 'RemoteApi::buildCreditFields'), 'cc uses protocol helper');
+assert_true(str_contains($src, 'approvedOrderStatusId'), 'cc catalog uses order status resolver');
 assert_true(str_contains($src, 'CURLOPT_SSL_VERIFYPEER') === false, 'cc controller does not disable TLS itself');
 
 $ach_controller = dirname(__DIR__) . '/src/api_ach/catalog/controller/payment/plugnpay_ach.php';
 $ach_src = is_file($ach_controller) ? (string)file_get_contents($ach_controller) : '';
 assert_true(str_contains($ach_src, 'class PlugnpayAch'), 'ach catalog class name');
 assert_true(str_contains($ach_src, 'RemoteApi::buildAchFields'), 'ach uses protocol helper');
+assert_true(str_contains($ach_src, 'approvedOrderStatusId'), 'ach catalog uses order status resolver');
+
+$cc_admin = (string)file_get_contents(dirname(__DIR__) . '/src/api_cc/admin/controller/payment/plugnpay_cc.php');
+$ach_admin = (string)file_get_contents(dirname(__DIR__) . '/src/api_ach/admin/controller/payment/plugnpay_ach.php');
+$ach_api = (string)file_get_contents(dirname(__DIR__) . '/src/api_ach/system/library/remote_api.php');
+assert_true(str_contains($cc_admin, 'function install'), 'cc admin install defaults order status');
+assert_true(str_contains($ach_admin, 'function install'), 'ach admin install defaults order status');
+assert_true(str_contains($ach_api, 'function resolveOrderStatusId'), 'ach protocol resolves Pending');
 
 if ($failed > 0) {
 	echo "\n{$failed} check(s) failed\n";
