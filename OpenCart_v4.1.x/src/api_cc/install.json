@@ -1,0 +1,7 @@
+{
+  "name": "PlugnPay Remote API (Credit Card)",
+  "description": "Onsite credit card checkout via PlugnPay Remote API (pnpremote.cgi). Increases PCI scope; storefront HTTPS and PHP cURL required.",
+  "version": "1.0.0",
+  "author": "PlugnPay Technologies",
+  "link": "https://www.plugnpay.com"
+}

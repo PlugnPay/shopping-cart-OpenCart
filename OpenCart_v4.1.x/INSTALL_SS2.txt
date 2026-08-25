@@ -26,7 +26,7 @@ Admin → Settings → Server → Session Samesite Cookie to None.
 To Install:
 
 1. Download plugnpay_ss2.ocmod.zip from this folder
-   (or zip the src/ tree so install.json is at the zip root).
+   (or zip the src/ss2/ tree so install.json is at the zip root).
    Do not rename the file. OpenCart 4 uses the zip name as the
    extension code (must be plugnpay_ss2.ocmod.zip).
 
@@ -59,7 +59,7 @@ found" after Install or Edit:
 The payment files are named smart_screens (not plugnpay_ss2). OpenCart 4
 cannot load a PHP class whose name contains a digit.
 
-See src/README.md for configuration notes and troubleshooting.
+See src/ss2/README.md for configuration notes and troubleshooting.
 
 Source (development):
-  src/
+  src/ss2/

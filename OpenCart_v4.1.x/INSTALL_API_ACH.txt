@@ -1,0 +1,56 @@
+====================================================
+PlugnPay Remote API Module (ACH / eCheck)
+Payment module for OpenCart v4.1.x — module v1.0.0
+Target: OpenCart 4.1.0.3
+====================================================
+
+***** IMPORTANT NOTES *****
+This module is provided "AS IS". Limited technical support assistance
+will be given to help diagnose/address problems with this module.
+
+This module collects bank-account data on your storefront and posts from
+the merchant server to PlugnPay Remote API
+(https://pay1.plugnpay.com/payment/pnpremote.cgi). This increases PCI /
+ACH scope. Install only if ACH is enabled on the gateway account.
+
+Storefront HTTPS is REQUIRED. PHP cURL with OpenSSL is required.
+
+Authorization Type:
+  authonly     — authorize only; use a Pending order status
+  authpostauth — authorize and settle
+
+Capture, void, and refund are performed in PlugnPay Merchant Admin —
+not from OpenCart.
+
+There is no public demo gateway account and no Test/Production toggle.
+Use merchant-supplied credentials from your PlugnPay account.
+***************************
+
+To Install:
+
+1. Download plugnpay_api_ach.ocmod.zip from this folder
+   (or zip the src/api_ach/ tree so install.json is at the zip root).
+   Do not rename the file. OpenCart 4 uses the zip name as the
+   extension code (must be plugnpay_api_ach.ocmod.zip).
+
+2. Admin → Extensions → Installer → Upload, then click Install.
+
+3. Admin → Extensions → Payments → Install
+   "PlugnPay Remote API (ACH / eCheck)".
+
+4. Edit the extension and set:
+     - Gateway Account (PlugnPay username) [required]
+     - Remote Client Password [required]
+     - Authorization Type
+     - Total, Order Status, Geo Zone, Status, Sort Order
+     - Debug Logging (optional; writes to storage/logs)
+
+5. Confirm storefront HTTPS.
+
+6. Place a test order using merchant-supplied PlugnPay credentials.
+
+See src/api_ach/README.md for configuration notes, troubleshooting,
+and a manual test checklist.
+
+Source (development):
+  src/api_ach/

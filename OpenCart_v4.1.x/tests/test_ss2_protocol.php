@@ -7,7 +7,7 @@
 
 declare(strict_types=1);
 
-$base = dirname(__DIR__) . '/src/system/library';
+$base = dirname(__DIR__) . '/src/ss2/system/library';
 require_once $base . '/smart_screens_protocol.php';
 require_once $base . '/smart_screens_logger.php';
 
@@ -93,23 +93,23 @@ assert_true($sanitized['card_cvv'] === '***REDACTED***', 'CVV redacted');
 assert_true($sanitized['publisher-password'] === '***REDACTED***', 'password redacted');
 assert_true($sanitized['pt_gateway_account'] === 'pnpdemo', 'account not redacted');
 
-$install = dirname(__DIR__) . '/src/install.json';
+$install = dirname(__DIR__) . '/src/ss2/install.json';
 $meta = is_file($install) ? json_decode((string)file_get_contents($install), true) : null;
 assert_true(is_array($meta) && ($meta['name'] ?? '') === 'PlugnPay Smart Screens v2', 'install.json name');
 assert_true(is_array($meta) && ($meta['version'] ?? '') === '1.0.1', 'install.json version');
 
-$controller = dirname(__DIR__) . '/src/catalog/controller/payment/smart_screens.php';
+$controller = dirname(__DIR__) . '/src/ss2/catalog/controller/payment/smart_screens.php';
 $src = is_file($controller) ? (string)file_get_contents($controller) : '';
 assert_true(str_contains($src, 'namespace Opencart\\Catalog\\Controller\\Extension\\PlugnpaySs2\\Payment;'), 'catalog namespace');
 assert_true(str_contains($src, 'class SmartScreens'), 'catalog class name');
 assert_true(str_contains($src, 'SmartScreensProtocol::buildHostedFields'), 'catalog uses protocol helper');
 assert_true(!str_contains($src, 'class PlugnpaySs2'), 'catalog class has no digit suffix');
 
-$admin = dirname(__DIR__) . '/src/admin/controller/payment/smart_screens.php';
+$admin = dirname(__DIR__) . '/src/ss2/admin/controller/payment/smart_screens.php';
 $admin_src = is_file($admin) ? (string)file_get_contents($admin) : '';
 assert_true(str_contains($admin_src, 'class SmartScreens'), 'admin class name');
-assert_true(is_file(dirname(__DIR__) . '/src/admin/view/template/payment/smart_screens.twig'), 'admin twig exists');
-assert_true(is_file(dirname(__DIR__) . '/src/catalog/view/template/payment/smart_screens.twig'), 'catalog twig exists');
+assert_true(is_file(dirname(__DIR__) . '/src/ss2/admin/view/template/payment/smart_screens.twig'), 'admin twig exists');
+assert_true(is_file(dirname(__DIR__) . '/src/ss2/catalog/view/template/payment/smart_screens.twig'), 'catalog twig exists');
 
 if ($failed > 0) {
 	echo "\n{$failed} check(s) failed\n";

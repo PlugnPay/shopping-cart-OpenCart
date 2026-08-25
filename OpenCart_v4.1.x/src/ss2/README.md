@@ -46,3 +46,6 @@ does not depend on the session cookie.
 ## Support
 
 Provided AS IS. See [PlugnPay docs](https://docs.plugnpay.com/).
+
+For onsite card or ACH collection on OpenCart 4.1.x, see the Remote API
+modules (`plugnpay_api_cc.ocmod.zip` / `plugnpay_api_ach.ocmod.zip`).

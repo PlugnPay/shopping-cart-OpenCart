@@ -1,0 +1,85 @@
+<fieldset>
+  <legend>{{ text_ach_echeck }}</legend>
+  <form id="form-plugnpay-ach" class="mb-3">
+    <div class="row mb-3 required">
+      <label for="input-ach-owner" class="col-sm-3 col-form-label">{{ entry_ach_owner }}</label>
+      <div class="col-sm-9">
+        <input type="text" name="ach_owner" value="{{ account_name }}" placeholder="{{ entry_ach_owner }}" id="input-ach-owner" class="form-control" autocomplete="name"/>
+      </div>
+    </div>
+    <div class="row mb-3 required">
+      <label class="col-sm-3 col-form-label">{{ entry_ach_accttype }}</label>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <input type="radio" name="ach_accttype" value="checking" id="input-ach-checking" class="form-check-input" checked/>
+          <label class="form-check-label" for="input-ach-checking">{{ text_ach_checking }}</label>
+        </div>
+        <div class="form-check">
+          <input type="radio" name="ach_accttype" value="savings" id="input-ach-savings" class="form-check-input"/>
+          <label class="form-check-label" for="input-ach-savings">{{ text_ach_savings }}</label>
+        </div>
+      </div>
+    </div>
+    <div class="row mb-3 required">
+      <label for="input-ach-routingnum" class="col-sm-3 col-form-label">{{ entry_ach_routingnum }}</label>
+      <div class="col-sm-9">
+        <input type="text" name="ach_routingnum" value="" placeholder="{{ entry_ach_routingnum }}" id="input-ach-routingnum" class="form-control" inputmode="numeric" autocomplete="off"/>
+      </div>
+    </div>
+    <div class="row mb-3 required">
+      <label for="input-ach-accountnum" class="col-sm-3 col-form-label">{{ entry_ach_accountnum }}</label>
+      <div class="col-sm-9">
+        <input type="text" name="ach_accountnum" value="" placeholder="{{ entry_ach_accountnum }}" id="input-ach-accountnum" class="form-control" inputmode="numeric" autocomplete="off"/>
+      </div>
+    </div>
+    <div class="row mb-3 required">
+      <label for="input-ach-checknum" class="col-sm-3 col-form-label">{{ entry_ach_checknum }}</label>
+      <div class="col-sm-9">
+        <input type="text" name="ach_checknum" value="" placeholder="{{ entry_ach_checknum }}" id="input-ach-checknum" class="form-control" inputmode="numeric" autocomplete="off"/>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <label class="col-sm-3 col-form-label">{{ entry_ach_acctclass }}</label>
+      <div class="col-sm-9">
+        <div class="form-check">
+          <input type="checkbox" name="ach_acctclass" value="business" id="input-ach-acctclass" class="form-check-input"/>
+          <label class="form-check-label" for="input-ach-acctclass">{{ text_ach_business }}</label>
+        </div>
+      </div>
+    </div>
+  </form>
+  <div class="text-end">
+    <button type="button" id="button-confirm" class="btn btn-primary">{{ button_confirm }}</button>
+  </div>
+</fieldset>
+<script type="text/javascript"><!--
+$('#button-confirm').on('click', function() {
+    var element = this;
+
+    $.ajax({
+        url: 'index.php?route=extension/plugnpay_api_ach/payment/plugnpay_ach.confirm&language={{ language }}',
+        type: 'post',
+        data: $('#form-plugnpay-ach :input'),
+        dataType: 'json',
+        cache: false,
+        beforeSend: function() {
+            $(element).button('loading');
+        },
+        complete: function() {
+            $(element).button('reset');
+        },
+        success: function(json) {
+            if (json['error']) {
+                $('#alert').prepend('<div class="alert alert-danger alert-dismissible"><i class="fa-solid fa-circle-exclamation"></i> ' + json['error'] + ' <button type="button" class="btn-close" data-bs-dismiss="alert"></button></div>');
+            }
+
+            if (json['redirect']) {
+                location = json['redirect'];
+            }
+        },
+        error: function(xhr, ajaxOptions, thrownError) {
+            console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+        }
+    });
+});
+//--></script>

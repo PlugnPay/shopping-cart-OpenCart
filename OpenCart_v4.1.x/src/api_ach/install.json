@@ -1,0 +1,7 @@
+{
+  "name": "PlugnPay Remote API (ACH / eCheck)",
+  "description": "Onsite ACH/eCheck checkout via PlugnPay Remote API (pnpremote.cgi). Increases PCI/ACH scope; storefront HTTPS and PHP cURL required. ACH must be enabled on the gateway account.",
+  "version": "1.0.0",
+  "author": "PlugnPay Technologies",
+  "link": "https://www.plugnpay.com"
+}

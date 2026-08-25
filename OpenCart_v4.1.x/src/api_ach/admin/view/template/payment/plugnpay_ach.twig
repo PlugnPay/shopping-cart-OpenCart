@@ -1,0 +1,106 @@
+{{ header }}{{ column_left }}
+<div id="content">
+  <div class="page-header">
+    <div class="container-fluid">
+      <div class="float-end">
+        <button type="submit" form="form-payment" data-bs-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa-solid fa-save"></i></button>
+        <a href="{{ back }}" data-bs-toggle="tooltip" title="{{ button_back }}" class="btn btn-light"><i class="fa-solid fa-reply"></i></a></div>
+      <h1>{{ heading_title }}</h1>
+      <ol class="breadcrumb">
+        {% for breadcrumb in breadcrumbs %}
+          <li class="breadcrumb-item"><a href="{{ breadcrumb.href }}">{{ breadcrumb.text }}</a></li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="card">
+      <div class="card-header"><i class="fa-solid fa-pencil"></i> {{ text_edit }}</div>
+      <div class="card-body">
+        <form id="form-payment" action="{{ save }}" method="post" data-oc-toggle="ajax">
+          <div class="row mb-3 required">
+            <label for="input-merchant" class="col-sm-2 col-form-label">{{ entry_merchant }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="payment_plugnpay_ach_merchant" value="{{ payment_plugnpay_ach_merchant }}" placeholder="{{ entry_merchant }}" id="input-merchant" class="form-control" autocomplete="off"/>
+              <div class="form-text">{{ help_merchant }}</div>
+              <div id="error-merchant" class="invalid-feedback"></div>
+            </div>
+          </div>
+          <div class="row mb-3 required">
+            <label for="input-password" class="col-sm-2 col-form-label">{{ entry_password }}</label>
+            <div class="col-sm-10">
+              <input type="password" name="payment_plugnpay_ach_password" value="{{ payment_plugnpay_ach_password }}" placeholder="{{ entry_password }}" id="input-password" class="form-control" autocomplete="new-password"/>
+              <div class="form-text">{{ help_password }}</div>
+              <div id="error-password" class="invalid-feedback"></div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-authtype" class="col-sm-2 col-form-label">{{ entry_authtype }}</label>
+            <div class="col-sm-10">
+              <select name="payment_plugnpay_ach_authtype" id="input-authtype" class="form-select">
+                <option value="authonly"{% if payment_plugnpay_ach_authtype == 'authonly' %} selected{% endif %}>{{ text_authonly }}</option>
+                <option value="authpostauth"{% if payment_plugnpay_ach_authtype == 'authpostauth' %} selected{% endif %}>{{ text_authpostauth }}</option>
+              </select>
+              <div class="form-text">{{ help_authtype }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-total" class="col-sm-2 col-form-label">{{ entry_total }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="payment_plugnpay_ach_total" value="{{ payment_plugnpay_ach_total }}" placeholder="{{ entry_total }}" id="input-total" class="form-control"/>
+              <div class="form-text">{{ help_total }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-order-status" class="col-sm-2 col-form-label">{{ entry_order_status }}</label>
+            <div class="col-sm-10">
+              <select name="payment_plugnpay_ach_order_status_id" id="input-order-status" class="form-select">
+                {% for order_status in order_statuses %}
+                  <option value="{{ order_status.order_status_id }}"{% if order_status.order_status_id == payment_plugnpay_ach_order_status_id %} selected{% endif %}>{{ order_status.name }}</option>
+                {% endfor %}
+              </select>
+              <div class="form-text">{{ help_order_status }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-geo-zone" class="col-sm-2 col-form-label">{{ entry_geo_zone }}</label>
+            <div class="col-sm-10">
+              <select name="payment_plugnpay_ach_geo_zone_id" id="input-geo-zone" class="form-select">
+                <option value="0">{{ text_all_zones }}</option>
+                {% for geo_zone in geo_zones %}
+                  <option value="{{ geo_zone.geo_zone_id }}"{% if geo_zone.geo_zone_id == payment_plugnpay_ach_geo_zone_id %} selected{% endif %}>{{ geo_zone.name }}</option>
+                {% endfor %}
+              </select>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">{{ entry_status }}</label>
+            <div class="col-sm-10">
+              <div class="form-check form-switch form-switch-lg">
+                <input type="hidden" name="payment_plugnpay_ach_status" value="0"/>
+                <input type="checkbox" name="payment_plugnpay_ach_status" value="1" id="input-status" class="form-check-input"{% if payment_plugnpay_ach_status %} checked{% endif %}/>
+              </div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label class="col-sm-2 col-form-label">{{ entry_debug }}</label>
+            <div class="col-sm-10">
+              <div class="form-check form-switch form-switch-lg">
+                <input type="hidden" name="payment_plugnpay_ach_debug" value="0"/>
+                <input type="checkbox" name="payment_plugnpay_ach_debug" value="1" id="input-debug" class="form-check-input"{% if payment_plugnpay_ach_debug %} checked{% endif %}/>
+              </div>
+              <div class="form-text">{{ help_debug }}</div>
+            </div>
+          </div>
+          <div class="row mb-3">
+            <label for="input-sort-order" class="col-sm-2 col-form-label">{{ entry_sort_order }}</label>
+            <div class="col-sm-10">
+              <input type="text" name="payment_plugnpay_ach_sort_order" value="{{ payment_plugnpay_ach_sort_order }}" placeholder="{{ entry_sort_order }}" id="input-sort-order" class="form-control"/>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{{ footer }}

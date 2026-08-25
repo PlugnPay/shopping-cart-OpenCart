@@ -1,7 +1,7 @@
 # Shopping Cart - OpenCart Payment Modules
 
 Easy to install payment modules for the OpenCart shopping cart.
-**OpenCart 4.1** includes Smart Screens v2 (hosted checkout). **OpenCart 3.0** has Remote API (onsite card and ACH) and Smart Screens v2. **OpenCart 2.3** has the same methods for the 2.x extension path. **OpenCart 1.5** is Remote API only.
+**OpenCart 4.1** includes Smart Screens v2 (hosted checkout) and Remote API (onsite card and ACH). **OpenCart 3.0** has Remote API and Smart Screens v2. **OpenCart 2.3** has the same methods for the 2.x extension path. **OpenCart 1.5** is Remote API only.
 
 ## Downloads by OpenCart version
 
@@ -9,8 +9,16 @@ Easy to install payment modules for the OpenCart shopping cart.
 
 * **Smart Screens v2** — gateway hosted checkout
   - [Download](./OpenCart_v4.1.x/plugnpay_ss2.ocmod.zip)
-  - Source: [./OpenCart_v4.1.x/src/](./OpenCart_v4.1.x/src/)
-  - Docs: [package README](./OpenCart_v4.1.x/README.md) · [INSTALL_SS2.txt](./OpenCart_v4.1.x/INSTALL_SS2.txt) · [module README](./OpenCart_v4.1.x/src/README.md)
+  - Source: [./OpenCart_v4.1.x/src/ss2/](./OpenCart_v4.1.x/src/ss2/)
+  - Docs: [package README](./OpenCart_v4.1.x/README.md) · [INSTALL_SS2.txt](./OpenCart_v4.1.x/INSTALL_SS2.txt) · [module README](./OpenCart_v4.1.x/src/ss2/README.md)
+* **Remote API (Credit Card)** — onsite card collection via `pnpremote.cgi`
+  - [Download](./OpenCart_v4.1.x/plugnpay_api_cc.ocmod.zip)
+  - Source: [./OpenCart_v4.1.x/src/api_cc/](./OpenCart_v4.1.x/src/api_cc/)
+  - Docs: [package README](./OpenCart_v4.1.x/README.md) · [INSTALL_API_CC.txt](./OpenCart_v4.1.x/INSTALL_API_CC.txt) · [module README](./OpenCart_v4.1.x/src/api_cc/README.md)
+* **Remote API (ACH / eCheck)** — onsite bank-account collection via `pnpremote.cgi`
+  - [Download](./OpenCart_v4.1.x/plugnpay_api_ach.ocmod.zip)
+  - Source: [./OpenCart_v4.1.x/src/api_ach/](./OpenCart_v4.1.x/src/api_ach/)
+  - Docs: [package README](./OpenCart_v4.1.x/README.md) · [INSTALL_API_ACH.txt](./OpenCart_v4.1.x/INSTALL_API_ACH.txt) · [module README](./OpenCart_v4.1.x/src/api_ach/README.md)
 
 Package overview: [./OpenCart_v4.1.x/README.md](./OpenCart_v4.1.x/README.md)
 
@@ -74,6 +82,16 @@ For complete instructions, open the README inside the zip (or the linked docs ab
 
 - Quick install: [OpenCart_v4.1.x/INSTALL_SS2.txt](./OpenCart_v4.1.x/INSTALL_SS2.txt)
 
+### OpenCart 4.1.x — Remote API (Credit Card / ACH)
+
+1. Download [plugnpay_api_cc.ocmod.zip](./OpenCart_v4.1.x/plugnpay_api_cc.ocmod.zip) or [plugnpay_api_ach.ocmod.zip](./OpenCart_v4.1.x/plugnpay_api_ach.ocmod.zip) (do not rename).
+2. Admin → Extensions → Installer → upload, then Install.
+3. Admin → Extensions → Payments → Install and configure the method.
+4. Enter Gateway Account and Remote Client Password. Use storefront HTTPS (required).
+
+- Credit Card: [OpenCart_v4.1.x/INSTALL_API_CC.txt](./OpenCart_v4.1.x/INSTALL_API_CC.txt)
+- ACH: [OpenCart_v4.1.x/INSTALL_API_ACH.txt](./OpenCart_v4.1.x/INSTALL_API_ACH.txt)
+
 ### OpenCart 3.x
 
 1. Download the zip for the module you want (API CC, API ACH, or Smart Screens v2).
@@ -103,7 +121,7 @@ Same overlay install. Use the matching `INSTALL_*.txt` in that version folder. O
 * OpenCart collects card data on your storefront (increases PCI scope).
 * Authorization is submitted to PlugnPay via cURL (`pnpremote.cgi`).
 * Storefront HTTPS and PHP cURL are required.
-* Transaction method: Authorization or Capture (auto-settle), depending on the package.
+* Transaction method: Authorization only (`authonly`) or Authorize and settle (`authpostauth`).
 * Capture / void / refund are done in PlugnPay Merchant Admin (not from OpenCart).
 
 ### Remote API (ACH / eCheck)
@@ -111,6 +129,8 @@ Same overlay install. Use the matching `INSTALL_*.txt` in that version folder. O
 * OpenCart collects bank-account data on your storefront (increases PCI / ACH scope).
 * Same Remote API path as credit card; install only if ACH is enabled on the gateway account.
 * Storefront HTTPS and PHP cURL are required.
+* Transaction method: Authorization only (`authonly`) or Authorize and settle (`authpostauth`).
+* Capture / void / refund are done in PlugnPay Merchant Admin (not from OpenCart).
 
 ## Repository layout
 
@@ -118,11 +138,15 @@ Same overlay install. Use the matching `INSTALL_*.txt` in that version folder. O
 shopping-cart-OpenCart/
   README.md
   .gitignore
-  OpenCart_v4.1.x/            # current (4.1.0.3) — Smart Screens v2
+  OpenCart_v4.1.x/            # current (4.1.0.3) — Smart Screens v2 + Remote API CC/ACH
     README.md
     INSTALL_SS2.txt
+    INSTALL_API_CC.txt
+    INSTALL_API_ACH.txt
     plugnpay_ss2.ocmod.zip
-    src/
+    plugnpay_api_cc.ocmod.zip
+    plugnpay_api_ach.ocmod.zip
+    src/{ss2,api_cc,api_ach}/
     tests/
   OpenCart_v3.x/              # legacy (3.0.3.2) — Remote API CC/ACH + Smart Screens v2
     README.md
