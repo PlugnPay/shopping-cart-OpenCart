@@ -1,0 +1,48 @@
+====================================================
+PlugnPay Remote API Module (Credit Card)
+Payment module for OpenCart v2.x
+Target: OpenCart 2.3.0.2
+====================================================
+
+***** IMPORTANT NOTES *****
+This module is provided "AS IS". Limited technical support assistance
+will be given to help diagnose/address problems with this module.
+
+This package overlays admin/ and catalog/ onto the OpenCart root.
+OpenCart collects card data on your SSL storefront and authorizes via
+PlugnPay Remote API (pnpremote.cgi). You must have PHP cURL and HTTPS.
+
+Capture / void / refund are done in PlugnPay Merchant Admin.
+***************************
+
+To Install:
+
+1. Download opencart_2.3_api_cc_module.zip from this folder
+   (or use the src/api_cc/ tree in this repository).
+
+2. Unzip into the OpenCart root so these files merge in place:
+     admin/language/en-gb/extension/payment/plugnpay_api_cc.php
+     admin/controller/extension/payment/plugnpay_api_cc.php
+     admin/view/template/extension/payment/plugnpay_api_cc.tpl
+     admin/view/image/payment/plugnpay.png
+     catalog/language/en-gb/extension/payment/plugnpay_api_cc.php
+     catalog/controller/extension/payment/plugnpay_api_cc.php
+     catalog/model/extension/payment/plugnpay_api_cc.php
+     catalog/view/theme/default/template/extension/payment/plugnpay_api_cc.tpl
+
+3. Admin → Extensions → Payments → Install "PlugnPay (API)".
+
+4. Edit the extension and set:
+     - PlugnPay Username
+     - Remote Client Password (API password — not the admin login)
+     - Transaction method (Authorization or Capture)
+     - Total, Order Status, Geo Zone, Status, Sort Order
+
+5. Place a test order over HTTPS.
+
+PHP files should be chmod 755; PNG files chmod 644.
+
+See src/api_cc/readme.txt for full vendor notes.
+
+Source (development):
+  src/api_cc/

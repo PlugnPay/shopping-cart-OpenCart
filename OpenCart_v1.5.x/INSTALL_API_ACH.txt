@@ -1,0 +1,49 @@
+====================================================
+PlugnPay Remote API Module (ACH / eCheck)
+Payment module for OpenCart v1.5.x
+====================================================
+
+***** IMPORTANT NOTES *****
+This module is provided "AS IS". Limited technical support assistance
+will be given to help diagnose/address problems with this module.
+
+This package overlays admin/ and catalog/ onto the OpenCart 1.5 root
+(paths are payment/, not extension/payment/). OpenCart collects
+ACH/eCheck data on your SSL storefront and authorizes via PlugnPay
+Remote API (pnpremote.cgi). You must have PHP cURL and HTTPS.
+ACH must be enabled on the gateway account.
+
+Capture / void / refund are done in PlugnPay Merchant Admin.
+***************************
+
+To Install:
+
+1. Download opencart_1.5_api_ach_module.zip from this folder
+   (or use the src/api_ach/ tree in this repository).
+
+2. Unzip into the OpenCart root so these files merge in place:
+     catalog/controller/payment/plugnpay_api_ach.php
+     catalog/language/english/payment/plugnpay_api_ach.php
+     catalog/model/payment/plugnpay_api_ach.php
+     catalog/view/theme/default/template/payment/plugnpay_api_ach.tpl
+     admin/controller/payment/plugnpay_api_ach.php
+     admin/language/english/payment/plugnpay_api_ach.php
+     admin/view/template/payment/plugnpay_api_ach.tpl
+     admin/view/image/payment/plugnpay.png
+
+3. Admin → Extensions → Payments → Install "PlugnPay (API) - ACH/eCheck".
+
+4. Edit the extension and set:
+     - Publisher-Name (PlugnPay username)
+     - Publisher-Password (Remote Client Password)
+     - Authorization Type
+     - Total, Order Status, Geo Zone, Status, Sort Order
+
+5. Place a test order over HTTPS.
+
+PHP files should be chmod 755; PNG files chmod 644.
+
+See src/api_ach/readme.txt for full vendor notes.
+
+Source (development):
+  src/api_ach/

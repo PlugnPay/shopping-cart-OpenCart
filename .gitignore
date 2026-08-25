@@ -1,0 +1,7 @@
+# Ignore OS junk and local archives; keep module zips in the repo
+.DS_Store
+Thumbs.db
+*.swp
+*~
+
+_archive/

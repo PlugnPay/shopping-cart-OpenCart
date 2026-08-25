@@ -1,0 +1,51 @@
+====================================================
+PlugnPay Smart Screens v2 Module
+Payment module for OpenCart v3.x
+Target: OpenCart 3.0.3.2
+====================================================
+
+***** IMPORTANT NOTES *****
+This module is provided "AS IS". Limited technical support assistance
+will be given to help diagnose/address problems with this module.
+
+This package overlays admin/ and catalog/ onto the OpenCart root.
+Customers are redirected to PlugnPay hosted Smart Screens for payment.
+OpenCart does not collect sensitive payment data. Storefront HTTPS is
+recommended for the return URL.
+
+Capture / void / refund are done in PlugnPay Merchant Admin.
+
+If customizations do not appear after install, disable Theme and SASS
+cache in Admin (Dashboard gear), then re-enable when finished.
+***************************
+
+To Install:
+
+1. Download opencart_3.0.3_ss2_module.zip from this folder
+   (or use the src/ss2/ tree in this repository).
+
+2. Unzip into the OpenCart root so these files merge in place:
+     catalog/controller/extension/payment/plugnpay_ss2.php
+     catalog/view/theme/default/template/extension/payment/plugnpay_ss2.twig
+     catalog/model/extension/payment/plugnpay_ss2.php
+     catalog/language/en-gb/extension/payment/plugnpay_ss2.php
+     admin/controller/extension/payment/plugnpay_ss2.php
+     admin/view/template/extension/payment/plugnpay_ss2.twig
+     admin/view/image/payment/plugnpay.png
+     admin/language/en-gb/extension/payment/plugnpay_ss2.php
+
+3. Admin → Extensions → Payments → Install "PlugnPay (SS2)".
+
+4. Edit the extension and set:
+     - Gateway Account (PlugnPay username)
+     - Success-Link URL (callback; usually leave as shown)
+     - Total, Order Status, Geo Zone, Status, Sort Order
+
+5. Place a test order and confirm the return to OpenCart.
+
+PHP files should be chmod 755; PNG files chmod 644.
+
+See src/ss2/readme.txt for full vendor notes.
+
+Source (development):
+  src/ss2/
