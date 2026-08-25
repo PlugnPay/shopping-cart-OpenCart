@@ -1,0 +1,65 @@
+====================================================
+PlugnPay Smart Screens v2 Module
+Payment module for OpenCart v4.1.x — module v1.0.1
+Target: OpenCart 4.1.0.3
+====================================================
+
+***** IMPORTANT NOTES *****
+This module is provided "AS IS". Limited technical support assistance
+will be given to help diagnose/address problems with this module.
+
+Customers are redirected to PlugnPay hosted Smart Screens
+(https://pay1.plugnpay.com/pay/). OpenCart does not collect sensitive
+payment data.
+
+Transactions are AUTHORIZATION-ONLY (pb_post_auth=no). Orders stay
+Pending / unpaid until you capture in PlugnPay Merchant Admin.
+Capture / void / refund are not available from OpenCart.
+
+There is no public demo gateway account. Use merchant-supplied
+credentials from your PlugnPay account.
+
+Storefront HTTPS is required. Because PlugnPay returns via POST, set
+Admin → Settings → Server → Session Samesite Cookie to None.
+***************************
+
+To Install:
+
+1. Download plugnpay_ss2.ocmod.zip from this folder
+   (or zip the src/ tree so install.json is at the zip root).
+   Do not rename the file. OpenCart 4 uses the zip name as the
+   extension code (must be plugnpay_ss2.ocmod.zip).
+
+2. Admin → Extensions → Installer → Upload, then click Install.
+
+3. Admin → Extensions → Payments → Install
+   "PlugnPay Smart Screens v2".
+
+4. Edit the extension and set:
+     - Gateway Account (PlugnPay username) [required]
+     - Success-Link URL (shown for reference; do not change)
+     - Total (optional minimum order amount)
+     - Order Status (use Pending)
+     - Geo Zone, Status, Sort Order
+     - Debug Logging (optional; writes to storage/logs)
+
+5. Confirm storefront HTTPS and Session Samesite Cookie = None.
+
+6. Place a test order and confirm the return to OpenCart.
+
+If you already installed an earlier 1.0.0 zip and got "page can't be
+found" after Install or Edit:
+
+1. Admin → Extensions → Payments → Uninstall PlugnPay Smart Screens v2
+   (if it appears).
+2. Admin → Extensions → Installer → Uninstall / remove plugnpay_ss2.
+3. If extension/plugnpay_ss2/ is still on disk, delete that folder.
+4. Upload this 1.0.1 zip and Install again (steps 2–6 above).
+
+The payment files are named smart_screens (not plugnpay_ss2). OpenCart 4
+cannot load a PHP class whose name contains a digit.
+
+See src/README.md for configuration notes and troubleshooting.
+
+Source (development):
+  src/

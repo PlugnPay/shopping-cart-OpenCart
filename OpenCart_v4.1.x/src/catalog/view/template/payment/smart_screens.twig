@@ -1,0 +1,13 @@
+{% if error %}
+  <div class="alert alert-danger">{{ error }}</div>
+{% else %}
+  <p>{{ text_redirect }}</p>
+  <form action="{{ action }}" method="post" id="form-plugnpay-ss2">
+    {% for name, value in hosted_fields %}
+      <input type="hidden" name="{{ name }}" value="{{ value }}"/>
+    {% endfor %}
+    <div class="text-end">
+      <button type="submit" id="button-confirm" class="btn btn-primary">{{ button_confirm }}</button>
+    </div>
+  </form>
+{% endif %}

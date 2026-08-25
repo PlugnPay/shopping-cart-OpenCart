@@ -1,12 +1,20 @@
 # Shopping Cart - OpenCart Payment Modules
 
 Easy to install payment modules for the OpenCart shopping cart.
-**OpenCart 3.0** includes Remote API (onsite card and ACH) and Smart Screens v2 (hosted checkout).
-**OpenCart 2.3** has the same methods for the 2.x extension path. **OpenCart 1.5** is Remote API only.
+**OpenCart 4.1** includes Smart Screens v2 (hosted checkout). **OpenCart 3.0** has Remote API (onsite card and ACH) and Smart Screens v2. **OpenCart 2.3** has the same methods for the 2.x extension path. **OpenCart 1.5** is Remote API only.
 
 ## Downloads by OpenCart version
 
-### OpenCart v3.x (current — target 3.0.3.2)
+### OpenCart v4.1.x (current — target 4.1.0.3)
+
+* **Smart Screens v2** — gateway hosted checkout
+  - [Download](./OpenCart_v4.1.x/plugnpay_ss2.ocmod.zip)
+  - Source: [./OpenCart_v4.1.x/src/](./OpenCart_v4.1.x/src/)
+  - Docs: [package README](./OpenCart_v4.1.x/README.md) · [INSTALL_SS2.txt](./OpenCart_v4.1.x/INSTALL_SS2.txt) · [module README](./OpenCart_v4.1.x/src/README.md)
+
+Package overview: [./OpenCart_v4.1.x/README.md](./OpenCart_v4.1.x/README.md)
+
+### OpenCart v3.x (legacy — target 3.0.3.2)
 
 * **Remote API (Credit Card)** — onsite card collection via `pnpremote.cgi`
   - [Download](./OpenCart_v3.x/opencart_3.0.3_api_cc_module.zip)
@@ -57,6 +65,15 @@ Package overview: [./OpenCart_v1.5.x/README.md](./OpenCart_v1.5.x/README.md)
 
 For complete instructions, open the README inside the zip (or the linked docs above).
 
+### OpenCart 4.1.x — Smart Screens v2
+
+1. Download [plugnpay_ss2.ocmod.zip](./OpenCart_v4.1.x/plugnpay_ss2.ocmod.zip) (do not rename the file).
+2. Admin → Extensions → Installer → upload, then Install.
+3. Admin → Extensions → Payments → Install and configure **PlugnPay Smart Screens v2**.
+4. Set Session Samesite Cookie to **None** (Settings → Server) and use storefront HTTPS.
+
+- Quick install: [OpenCart_v4.1.x/INSTALL_SS2.txt](./OpenCart_v4.1.x/INSTALL_SS2.txt)
+
 ### OpenCart 3.x
 
 1. Download the zip for the module you want (API CC, API ACH, or Smart Screens v2).
@@ -73,6 +90,14 @@ Same overlay install. Use the matching `INSTALL_*.txt` in that version folder. O
 
 ## Usage
 
+### Smart Screens v2 (OpenCart 4.1 / 3.x / 2.x)
+
+* Hosted checkout on PlugnPay; the cart does **not** collect sensitive payment data.
+* Customer is redirected to PlugnPay, then returned to OpenCart after approval or decline.
+* Storefront HTTPS is required for a reliable return URL.
+* For OpenCart 4.1: transactions are authorization-only (`pb_post_auth=no`); successful orders stay Pending until settled in PlugnPay Admin. Set Session Samesite Cookie to **None**.
+* Capture / void / refund are done in PlugnPay Merchant Admin.
+
 ### Remote API (Credit Card)
 
 * OpenCart collects card data on your storefront (increases PCI scope).
@@ -87,20 +112,19 @@ Same overlay install. Use the matching `INSTALL_*.txt` in that version folder. O
 * Same Remote API path as credit card; install only if ACH is enabled on the gateway account.
 * Storefront HTTPS and PHP cURL are required.
 
-### Smart Screens v2 (OpenCart 3.x / 2.x)
-
-* Hosted checkout on PlugnPay; the cart does **not** collect sensitive payment data.
-* Customer is redirected to PlugnPay, then returned to OpenCart after approval or decline.
-* Storefront HTTPS is recommended (required for a reliable return URL on 3.x).
-* Capture / void / refund are done in PlugnPay Merchant Admin.
-
 ## Repository layout
 
 ```
 shopping-cart-OpenCart/
   README.md
   .gitignore
-  OpenCart_v3.x/              # current (3.0.3.2) — Remote API CC/ACH + Smart Screens v2
+  OpenCart_v4.1.x/            # current (4.1.0.3) — Smart Screens v2
+    README.md
+    INSTALL_SS2.txt
+    plugnpay_ss2.ocmod.zip
+    src/
+    tests/
+  OpenCart_v3.x/              # legacy (3.0.3.2) — Remote API CC/ACH + Smart Screens v2
     README.md
     INSTALL_API_CC.txt
     INSTALL_API_ACH.txt

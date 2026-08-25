@@ -1,0 +1,7 @@
+{
+  "name": "PlugnPay Smart Screens v2",
+  "description": "Hosted authorization-only checkout via PlugnPay Smart Screens v2 (pay1.plugnpay.com/pay/). OpenCart does not collect card data.",
+  "version": "1.0.1",
+  "author": "PlugnPay Technologies",
+  "link": "https://www.plugnpay.com"
+}
